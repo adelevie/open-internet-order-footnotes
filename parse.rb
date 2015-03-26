@@ -1,0 +1,24 @@
+require 'bundler/setup'
+require 'nokogiri'
+require 'json'
+require 'pry'
+
+path = 'word/footnotes.xml'
+`./download.sh` if !File.exist?(path)
+f = File.open(path)
+doc = Nokogiri::XML(f)
+
+footnotes = doc.children[0].children[3..-1]
+
+my_footnotes = footnotes.to_ary.map do |fn|
+  {
+    value: fn.attributes['id'].value.to_i - 1,
+    text: fn.text.strip
+  }
+end
+
+STDOUT.puts JSON.generate my_footnotes
+
+#binding.pry
+
+f.close
