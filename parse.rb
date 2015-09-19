@@ -27,7 +27,7 @@ filers = [
   "Free Press",
   "Public Knowledge",
   "New America",
-  "Pendelton"
+  "Pendleton"
 ]
 
 filers.map! do |filer|
