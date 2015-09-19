@@ -17,8 +17,26 @@ my_footnotes = footnotes.to_ary.map do |fn|
   }
 end
 
-STDOUT.puts JSON.generate my_footnotes
+#STDOUT.puts JSON.generate my_footnotes
 
-#binding.pry
+filers = [
+  "Comcast",
+  "AT&T",
+  "Verizon",
+  "CTIA",
+  "Free Press",
+  "Public Knowledge",
+  "New America",
+  "Pendelton"
+]
+
+filers.map! do |filer|
+  {
+    filer: filer,
+    count: my_footnotes.select {|fn| fn[:text].include?(filer)}.length
+  }
+end
+
+binding.pry
 
 f.close
